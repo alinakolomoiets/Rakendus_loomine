@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -221,8 +221,10 @@ namespace Rakendus_loomine
                 Text = "k",
             };
             tableLayoutPanel1.Controls.Add(lbl, 3, 3);
-            tableLayoutPanel1.Controls.Add(lbl, 3, 3);
-            AssignIconsToSquares();
+			lbl.ForeColor = lbl.BackColor;
+			timer.Tick += timer1_Tick;
+			lbl.Click += label1_Click;
+			AssignIconsToSquares();
         }
         private void AssignIconsToSquares()
         {
@@ -238,19 +240,64 @@ namespace Rakendus_loomine
                 }
             }
         }
-        private void label1_Click(object sender, EventArgs e)
+		private void label1_Click(object sender, EventArgs e)
         {
-            Label clickedLabel = sender as Label;
+			if (timer.Enabled == true)
+				return;
 
-            if (clickedLabel != null)
-            {
+			Label clickedLabel = sender as Label;
 
-                if (clickedLabel.ForeColor == Color.Black)
-                    return;
+			if (clickedLabel != null)
+			{
+				if (clickedLabel.ForeColor == Color.Black)
+					return;
 
-                clickedLabel.ForeColor = Color.Black;
-            }
-        }
 
-    }
+				if (firstClicked == null)
+				{
+					firstClicked = clickedLabel;
+					firstClicked.ForeColor = Color.Black;
+					return;
+				}
+
+					secondClicked = clickedLabel;
+					secondClicked.ForeColor = Color.Black;
+					CheckForWinner();
+					
+                if (firstClicked.Text == secondClicked.Text)
+					{
+						firstClicked = null;
+						secondClicked = null;
+						return;
+					}
+					timer.Start();
+		    }
+		}
+		private void timer1_Tick(object sender, EventArgs e)
+		{
+			timer.Stop();
+
+
+			firstClicked.ForeColor = firstClicked.BackColor;
+			secondClicked.ForeColor = secondClicked.BackColor;
+
+			firstClicked = null;
+			secondClicked = null;
+		}
+		private void CheckForWinner()
+		{
+			foreach (Control control in tableLayoutPanel1.Controls)
+			{
+				Label iconLabel = control as Label;
+
+				if (iconLabel != null)
+				{
+					if (iconLabel.ForeColor == iconLabel.BackColor)
+						return;
+				}
+			}
+			MessageBox.Show("You matched all the icons!", "Congratulations");
+			Close();
+		}
+	}
 }
