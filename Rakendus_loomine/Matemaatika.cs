@@ -33,6 +33,18 @@ namespace Rakendus_loomine
                 Location = new System.Drawing.Point(50, 60),
                 BackColor = System.Drawing.Color.LightSteelBlue,
             };
+                MessageBox.Show("Valmis valima?", "Aken");
+                var vastus = MessageBox.Show("Tere , kas tahad näited lahendada?", "Kas ma mängime", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (vastus == DialogResult.Yes)
+                {
+                    MessageBox.Show("Hakkame mängima;)");
+                 }
+                else
+                {
+                this.Close();
+                }
+
+
             timeLabel = new Label
             {
                 Text = "aega veel: ",
@@ -118,6 +130,11 @@ namespace Rakendus_loomine
             {
                 timer.Stop();
                 MessageBox.Show("Sinu vastused on õiged", "Palju õnne!");
+            }
+			else if (Kontroll())
+            {
+                timer.Stop();
+                MessageBox.Show("Sinu vastused on vale", "Palju uuesti!");
             }
         }
     }
