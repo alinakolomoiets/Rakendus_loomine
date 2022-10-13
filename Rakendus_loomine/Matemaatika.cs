@@ -33,8 +33,8 @@ namespace Rakendus_loomine
                 Location = new System.Drawing.Point(50, 60),
                 BackColor = System.Drawing.Color.LightSteelBlue,
             };
-                MessageBox.Show("Valmis valima?", "Aken");
-                var vastus = MessageBox.Show("Tere , kas tahad näited lahendada?", "Kas ma mängime", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                MessageBox.Show("Valmis valima?", "Aken");//Küsib, Kas soovite mängida või mitte
+			var vastus = MessageBox.Show("Tere , kas tahad näited lahendada?", "Kas ma mängime", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (vastus == DialogResult.Yes)
                 {
                     MessageBox.Show("Hakkame mängima;)");

@@ -15,11 +15,15 @@ namespace Rakendus_loomine
             Button selge;
             Button sulge;
             Button näidata;
-            PictureBox pilt;
+		    Button suur;
+            Button vaike;
+		    PictureBox pilt;
             TableLayoutPanel tableLayoutPanel1;
             CheckBox box;
             OpenFileDialog openFileDialog;
-            public Pildid()
+		    int h = 790;
+		    int w = 400;
+		public Pildid()
             {
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Text = "Pildid";
@@ -84,10 +88,25 @@ namespace Rakendus_loomine
                 ForeColor = Color.Black,
 
             };
-            näidata.Click += Tegevus;
+			suur = new Button()
+			{
+				Text = "Suur",
+				BackColor = Color.White,
+				ForeColor = Color.Black,
+			};
+			vaike = new Button()
+			{
+				Text = "Vaike",
+				BackColor = Color.White,
+				ForeColor = Color.Black,
+			};
+			näidata.Click += Tegevus;
             selge.Click += Tegevus;
             sulge.Click += Tegevus;
-            Button[] buttons = { selge, näidata, sulge };
+			suur.Click += Tegevus;
+			vaike.Click += Tegevus; 
+
+			Button[] buttons = { selge, näidata, sulge,suur,vaike };
             FlowLayoutPanel flowLayoutPanel = new FlowLayoutPanel()
             {
                 Dock = System.Windows.Forms.DockStyle.Fill,
@@ -112,8 +131,7 @@ namespace Rakendus_loomine
             else
                 pilt.SizeMode = PictureBoxSizeMode.Normal;
         }
-
-        private void Tegevus(object sender, EventArgs e)
+		private void Tegevus(object sender, EventArgs e)
         {
             Button nupp_sender = (Button)sender;
             if (nupp_sender.Text == "Näita")
@@ -123,7 +141,7 @@ namespace Rakendus_loomine
                     pilt.Load(openFileDialog.FileName);
                 }
             }
-            else if (nupp_sender.Text == "Kustuta")
+			else if (nupp_sender.Text == "Kustuta")
             {
                 pilt.Image = null;
             }
@@ -131,6 +149,19 @@ namespace Rakendus_loomine
             {
                 this.Close();
             }
-        }
+			if (nupp_sender.Text == "Suur")
+			{
+				h += 15;
+				w += 15;
+				pilt.Size = new Size(w, h);
+			}
+			else if (nupp_sender.Text == "Vaike")
+			{
+				w -= 15;
+				h -= 15;
+				pilt.Size = new Size(w, h);
+			}
+
+		}
     }
 }

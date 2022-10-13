@@ -12,9 +12,9 @@ namespace Rakendus_loomine
 {
 	public partial class Sobitamise_mäng : Form
 	{
-        Button nupp1 , nupp2, nupp3;
+        Button nupp1 , nupp2;
         Random random = new Random();
-		string text;
+		//string text;
 		int rida = 0;
 		int tulp = 0;
 		List<string> icons = new List<string>()
@@ -46,25 +46,24 @@ namespace Rakendus_loomine
 
 		public Sobitamise_mäng()
 		{
-			nupp1 = new Button();
-			Text = "Level 1";
-			nupp1.Location = new Point(300, 520);
-			Size = new System.Drawing.Size(100, 20);
+			nupp1 = new Button()
+			{
+				Text = "Level 1",
+				Location = new Point(100, 520),
+				Size = new System.Drawing.Size(100, 20),
+			};
+			nupp2 = new Button()
+			{
+				Text = "Level 2",
+				Location = new Point(200, 520),
+				Size = new System.Drawing.Size(100, 20),
+			};
 			this.Controls.Add(nupp1);
-
-			nupp2 = new Button();
-			Text = "Level 2";
-			Location = new System.Drawing.Point(250, 550);
-			Size = new System.Drawing.Size(100, 20);
+			nupp1.Click += Level;
 			this.Controls.Add(nupp2);
+			nupp2.Click += Level;
 
-			nupp3 = new Button();
-			Text = "Level 3";
-			Location = new System.Drawing.Point(300, 550);
-			Size = new System.Drawing.Size(100, 20);
-			this.Controls.Add(nupp3);
-
-			this.Size = new System.Drawing.Size(550, 600);
+			this.Size = new System.Drawing.Size(800, 600);
 			this.Text = "Sobitamise Mäng";
 			this.MaximizeBox = false;
 
@@ -74,7 +73,7 @@ namespace Rakendus_loomine
 				ColumnCount = 4,
 				Location = new System.Drawing.Point(3, 4),
 				Name = "tableLayoutPanel1",
-				RowCount = 4,
+				//RowCount = 4,
 				Size = new System.Drawing.Size(527, 506),
 				TabIndex = 0,
 				CellBorderStyle = TableLayoutPanelCellBorderStyle.Inset,
@@ -87,14 +86,95 @@ namespace Rakendus_loomine
 			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
 			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
 
+
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+			this.Controls.Add(tableLayoutPanel1);
 
 
 
-				for (int j = 0; j <=15; j++)
+			//		for (int j = 0; j <=15; j++)
+			//		{
+			//			lbl = new Label()
+			//			{
+			//				BackColor = System.Drawing.Color.CornflowerBlue,
+			//				AutoSize = false,
+			//				Dock = System.Windows.Forms.DockStyle.Fill,
+			//				TextAlign = System.Drawing.ContentAlignment.MiddleCenter,
+			//				Font = new System.Drawing.Font("Webdings", 48, System.Drawing.FontStyle.Bold),
+			//				Text = "",
+			//			};
+			//			tableLayoutPanel1.Controls.Add(lbl, rida, tulp);
+			//			rida++;
+			//			lbl.ForeColor = lbl.BackColor;
+			//			lbl.Click += label1_Click;
+			//	}
+			//		tulp++;
+			//		rida = 0;
+			//	foreach (Control control in tableLayoutPanel1.Controls)
+			//	{
+			//		Label iconLabel = control as Label;
+			//		if (iconLabel != null)
+			//		{
+			//			int randomNumber = random.Next(icons.Count);
+			//			iconLabel.Text = icons[randomNumber];
+			//			iconLabel.ForeColor = iconLabel.BackColor;
+			//			icons.RemoveAt(randomNumber);
+			//		}
+			//	}
+			//	timer.Tick += timer1_Tick;
+			//	this.Controls.Add(tableLayoutPanel1);
+		}
+		private void Level (object sender, EventArgs e)//Tase . Nuppude vajutamisel valitakse tase
+		{
+			Button nupp_sender = (Button)sender;
+			if (nupp_sender.Text == "Level 1")//lihtne tase
+			{
+				tableLayoutPanel1.RowCount = 4;
+				tableLayoutPanel1.ColumnCount = 4;
+				for (int j = 0; j <= 15; j++)
+					{
+						lbl = new Label()
+						{
+							BackColor = System.Drawing.Color.CornflowerBlue,
+							AutoSize = false,
+							Dock = System.Windows.Forms.DockStyle.Fill,
+							TextAlign = System.Drawing.ContentAlignment.MiddleCenter,
+							Font = new System.Drawing.Font("Webdings", 48, System.Drawing.FontStyle.Bold),
+							Text = "c",
+						};
+						tableLayoutPanel1.Controls.Add(lbl, rida, tulp);
+						rida++;
+						lbl.ForeColor = lbl.BackColor;
+						lbl.Click += label1_Click;
+					}
+					tulp++;
+					rida = 0;
+				foreach (Control control in tableLayoutPanel1.Controls)
+					{
+						Label iconLabel = control as Label;
+						if (iconLabel != null)
+						{
+							int randomNumber = random.Next(icons.Count);
+							iconLabel.Text = icons[randomNumber];
+							iconLabel.ForeColor = iconLabel.BackColor;
+							icons.RemoveAt(randomNumber);
+						}
+					}
+					timer.Tick += timer1_Tick;
+
+				}
+			if (nupp_sender.Text == "Level 2")//keeruline tase
+			{
+				tableLayoutPanel1.RowCount = 8;
+				tableLayoutPanel1.ColumnCount = 4;
+				for (int j = 0; j <= 31; j++)
 				{
 					lbl = new Label()
 					{
@@ -103,31 +183,31 @@ namespace Rakendus_loomine
 						Dock = System.Windows.Forms.DockStyle.Fill,
 						TextAlign = System.Drawing.ContentAlignment.MiddleCenter,
 						Font = new System.Drawing.Font("Webdings", 48, System.Drawing.FontStyle.Bold),
-						Text = "",
+						Text = "c",
 					};
 					tableLayoutPanel1.Controls.Add(lbl, rida, tulp);
 					rida++;
 					lbl.ForeColor = lbl.BackColor;
 					lbl.Click += label1_Click;
-			}
+				}
 				tulp++;
 				rida = 0;
-			foreach (Control control in tableLayoutPanel1.Controls)
-			{
-				Label iconLabel = control as Label;
-				if (iconLabel != null)
+				foreach (Control control in tableLayoutPanel1.Controls)
 				{
-					int randomNumber = random.Next(icons.Count);
-					iconLabel.Text = icons[randomNumber];
-					iconLabel.ForeColor = iconLabel.BackColor;
-					icons.RemoveAt(randomNumber);
+					Label iconLabel = control as Label;
+					if (iconLabel != null)
+					{
+						int randomNumber = random.Next(icns1.Count);
+						iconLabel.Text = icns1[randomNumber];
+						iconLabel.ForeColor = iconLabel.BackColor;
+						icns1.RemoveAt(randomNumber);
+					}
 				}
+				timer.Tick += timer1_Tick;
 			}
-			timer.Tick += timer1_Tick;
-			this.Controls.Add(tableLayoutPanel1);
 		}
 
-		private void label1_Click(object sender, EventArgs e)
+			private void label1_Click(object sender, EventArgs e)
         {
 			if (timer.Enabled == true)
 				return;
