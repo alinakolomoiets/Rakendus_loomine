@@ -12,9 +12,9 @@ namespace Rakendus_loomine
 {
 	public partial class Sobitamise_mäng : Form
 	{
-        Button nupp1 , nupp2;
+		//TextBox textBox1;
+		Button nupp1 , nupp2;
         Random random = new Random();
-		//string text;
 		int rida = 0;
 		int tulp = 0;
 		List<string> icons = new List<string>()
@@ -29,11 +29,6 @@ namespace Rakendus_loomine
 				 "e", "e", "q", "q", "f", "f", "t", "t",
 				  "r", "r", "s", "s", "x", "x", "a", "a"
         };
-			List<string> icon2 = new List<string>()
-        {
-                "!", "!", "N", "N", ",", ",", "k", "k",
-                 "b", "b", "v", "v", "w", "w", "z", "z"
-        };
 
         public Timer timer = new Timer { Interval = 750 };
 
@@ -42,10 +37,8 @@ namespace Rakendus_loomine
 
         Label lbl;
         TableLayoutPanel tableLayoutPanel1;
-
-
 		public Sobitamise_mäng()
-		{
+		{  
 			nupp1 = new Button()
 			{
 				Text = "Level 1",
@@ -58,6 +51,7 @@ namespace Rakendus_loomine
 				Location = new Point(200, 520),
 				Size = new System.Drawing.Size(100, 20),
 			};
+
 			this.Controls.Add(nupp1);
 			nupp1.Click += Level;
 			this.Controls.Add(nupp2);
@@ -73,7 +67,6 @@ namespace Rakendus_loomine
 				ColumnCount = 4,
 				Location = new System.Drawing.Point(3, 4),
 				Name = "tableLayoutPanel1",
-				//RowCount = 4,
 				Size = new System.Drawing.Size(527, 506),
 				TabIndex = 0,
 				CellBorderStyle = TableLayoutPanelCellBorderStyle.Inset,
@@ -96,40 +89,6 @@ namespace Rakendus_loomine
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
 			this.Controls.Add(tableLayoutPanel1);
-
-
-
-			//		for (int j = 0; j <=15; j++)
-			//		{
-			//			lbl = new Label()
-			//			{
-			//				BackColor = System.Drawing.Color.CornflowerBlue,
-			//				AutoSize = false,
-			//				Dock = System.Windows.Forms.DockStyle.Fill,
-			//				TextAlign = System.Drawing.ContentAlignment.MiddleCenter,
-			//				Font = new System.Drawing.Font("Webdings", 48, System.Drawing.FontStyle.Bold),
-			//				Text = "",
-			//			};
-			//			tableLayoutPanel1.Controls.Add(lbl, rida, tulp);
-			//			rida++;
-			//			lbl.ForeColor = lbl.BackColor;
-			//			lbl.Click += label1_Click;
-			//	}
-			//		tulp++;
-			//		rida = 0;
-			//	foreach (Control control in tableLayoutPanel1.Controls)
-			//	{
-			//		Label iconLabel = control as Label;
-			//		if (iconLabel != null)
-			//		{
-			//			int randomNumber = random.Next(icons.Count);
-			//			iconLabel.Text = icons[randomNumber];
-			//			iconLabel.ForeColor = iconLabel.BackColor;
-			//			icons.RemoveAt(randomNumber);
-			//		}
-			//	}
-			//	timer.Tick += timer1_Tick;
-			//	this.Controls.Add(tableLayoutPanel1);
 		}
 		private void Level (object sender, EventArgs e)//Tase . Nuppude vajutamisel valitakse tase
 		{
@@ -142,6 +101,7 @@ namespace Rakendus_loomine
 					{
 						lbl = new Label()
 						{
+
 							BackColor = System.Drawing.Color.CornflowerBlue,
 							AutoSize = false,
 							Dock = System.Windows.Forms.DockStyle.Fill,
@@ -207,8 +167,11 @@ namespace Rakendus_loomine
 			}
 		}
 
-			private void label1_Click(object sender, EventArgs e)
+		int clickCount;
+		private void label1_Click(object sender, EventArgs e)
         {
+			lbl.Text = (clickCount++).ToString();
+
 			if (timer.Enabled == true)
 				return;
 
@@ -238,12 +201,11 @@ namespace Rakendus_loomine
 						return;
 					}
 					timer.Start();
-		    }
+			}
 		}
 		private void timer1_Tick(object sender, EventArgs e)
 		{
 			timer.Stop();
-
 
 			firstClicked.ForeColor = firstClicked.BackColor;
 			secondClicked.ForeColor = secondClicked.BackColor;
