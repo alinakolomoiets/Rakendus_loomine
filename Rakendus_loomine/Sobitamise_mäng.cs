@@ -12,7 +12,6 @@ namespace Rakendus_loomine
 {
 	public partial class Sobitamise_mäng : Form
 	{
-		//TextBox textBox1;
 		Button nupp1 , nupp2;
         Random random = new Random();
 		int rida = 0;
@@ -34,11 +33,12 @@ namespace Rakendus_loomine
 
         Label firstClicked = null;
         Label secondClicked = null;
-
+		Label clickLabel;
         Label lbl;
         TableLayoutPanel tableLayoutPanel1;
 		public Sobitamise_mäng()
-		{  
+
+		{
 			nupp1 = new Button()
 			{
 				Text = "Level 1",
@@ -60,6 +60,17 @@ namespace Rakendus_loomine
 			this.Size = new System.Drawing.Size(800, 600);
 			this.Text = "Sobitamise Mäng";
 			this.MaximizeBox = false;
+
+			clickLabel = new Label
+			{
+				Location = new Point(350, 520),
+				Text = "Click: ",
+				AutoSize = false,
+				BorderStyle = BorderStyle.FixedSingle,
+				Size = new System.Drawing.Size(200, 30),
+				Font = new Font("Times New Roman", 20, FontStyle.Bold)
+			};
+			this.Controls.Add(clickLabel);
 
 
 			tableLayoutPanel1 = new TableLayoutPanel()
@@ -107,13 +118,14 @@ namespace Rakendus_loomine
 							Dock = System.Windows.Forms.DockStyle.Fill,
 							TextAlign = System.Drawing.ContentAlignment.MiddleCenter,
 							Font = new System.Drawing.Font("Webdings", 48, System.Drawing.FontStyle.Bold),
-							Text = "c",
+							Text = "",
 						};
-						tableLayoutPanel1.Controls.Add(lbl, rida, tulp);
+						tableLayoutPanel1.Controls.Add(lbl , rida, tulp);
 						rida++;
 						lbl.ForeColor = lbl.BackColor;
+						//clickLabel.Click += ButtonClicked;
 						lbl.Click += label1_Click;
-					}
+				}
 					tulp++;
 					rida = 0;
 				foreach (Control control in tableLayoutPanel1.Controls)
@@ -129,7 +141,7 @@ namespace Rakendus_loomine
 					}
 					timer.Tick += timer1_Tick;
 
-				}
+			}
 			if (nupp_sender.Text == "Level 2")//keeruline tase
 			{
 				tableLayoutPanel1.RowCount = 8;
@@ -202,6 +214,7 @@ namespace Rakendus_loomine
 					}
 					timer.Start();
 			}
+
 		}
 		private void timer1_Tick(object sender, EventArgs e)
 		{
